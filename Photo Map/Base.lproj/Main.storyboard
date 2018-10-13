@@ -25,10 +25,21 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kkn-o8-bx1">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYa-GO-L4E">
+                                <rect key="frame" x="100" y="464" width="175" height="193"/>
+                                <state key="normal" image="camera"/>
+                                <connections>
+                                    <action selector="onPhotoClicked:" destination="ghP-Ww-KKQ" eventType="touchUpInside" id="mae-uU-WNq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="fYa-GO-L4E" firstAttribute="top" secondItem="vrG-Wc-0bn" secondAttribute="bottom" constant="400" id="34H-BZ-RXk"/>
                             <constraint firstItem="kkn-o8-bx1" firstAttribute="leading" secondItem="Lxe-6f-KEH" secondAttribute="leading" id="Cp2-59-fch"/>
+                            <constraint firstItem="fYa-GO-L4E" firstAttribute="leading" secondItem="Lxe-6f-KEH" secondAttribute="leading" constant="100" id="VY2-N2-9yy"/>
+                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="fYa-GO-L4E" secondAttribute="bottom" constant="10" id="Vv5-97-04g"/>
+                            <constraint firstAttribute="trailing" secondItem="fYa-GO-L4E" secondAttribute="trailing" constant="100" id="hwf-wi-wNF"/>
                             <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="kkn-o8-bx1" secondAttribute="bottom" id="ihb-z3-kKt"/>
                             <constraint firstItem="kkn-o8-bx1" firstAttribute="top" secondItem="vrG-Wc-0bn" secondAttribute="bottom" id="peD-hj-6fD"/>
                             <constraint firstAttribute="trailing" secondItem="kkn-o8-bx1" secondAttribute="trailing" id="sip-lr-IhX"/>
@@ -170,4 +181,7 @@
             <point key="canvasLocation" x="109" y="-3"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="64" height="64"/>
+    </resources>
 </document>

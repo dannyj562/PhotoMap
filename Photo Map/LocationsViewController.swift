@@ -18,6 +18,8 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
 
     var results: NSArray = []
     
+    var userImage: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
