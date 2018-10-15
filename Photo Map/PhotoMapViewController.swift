@@ -16,6 +16,8 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var pinImage: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initMap()
@@ -28,14 +30,12 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBAction func onPhotoClicked(_ sender: UIButton) {
         initImageController()
-        self.performSegue(withIdentifier: "tapSegue", sender: nil)
     }
     
     private func initImageController() {
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
-        vc.sourceType = UIImagePickerControllerSourceType.camera
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             print("Camera is available 📸")
             vc.sourceType = .camera
@@ -51,13 +51,12 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         //let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
-        // Do something with the images (based on your use case)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let locationViewController = storyboard.instantiateViewController(withIdentifier: "LocationViewController") as! LocationsViewController
-        locationViewController.userImage = editedImage
+        self.pinImage = editedImage
         
         // Dismiss UIImagePickerController to go back to your original view controller
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+             self.performSegue(withIdentifier: "tagSegue", sender: nil)
+        }
     }
     
     override func didReceiveMemoryWarning() {
