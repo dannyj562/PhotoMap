@@ -12,7 +12,7 @@ import CoreLocation
 import AddressBookUI
 import MessageUI
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -54,21 +54,35 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         self.pinImage = editedImage
         
         // Dismiss UIImagePickerController to go back to your original view controller
-        dismiss(animated: true) {
-             self.performSegue(withIdentifier: "tagSegue", sender: nil)
-        }
+        dismiss(animated: true, completion: {
+             self.performSegue(withIdentifier: "tagSegue", sender: self)
+        })
     }
     
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        self.navigationController?.popToViewController(self, animated: true)
+        /*
+        let locationCoordinates = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        let region = MKCoordinateRegionMake(locationCoordinates, MKCoordinateSpanMake(0.1, 0.1))
+        self.mapView.setRegion(region, animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = locationCoordinates
+        annotation.title = "\(latitude), \(longitude)"
+        self.mapView.addAnnotation(annotation)
+        */
+        
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let destination = segue.destination as? LocationsViewController
+        destination?.delegate = self
     }
 }

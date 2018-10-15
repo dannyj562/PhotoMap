@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LocationsViewControllerDelegate : class {
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
+}
+
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     let CLIENT_ID = "QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL"
@@ -15,7 +19,8 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-
+    
+    weak var delegate: LocationsViewControllerDelegate!
     var results: NSArray = []
     
     override func viewDidLoad() {
@@ -42,7 +47,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // This is the selected venue
         let venue = results[(indexPath as NSIndexPath).row] as! NSDictionary
@@ -54,6 +59,8 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         let lngString = "\(lng)"
 
         print(latString + " " + lngString)
+        
+        delegate.locationsPickedLocation(controller: self, latitude: lat, longitude: lng)
     }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
