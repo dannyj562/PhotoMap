@@ -10,6 +10,10 @@ import UIKit
 
 class FullImageViewController: UIViewController {
 
+    @IBOutlet weak var fullImage: UIImageView!
+    
+    var linkerImage: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
